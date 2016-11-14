@@ -9,10 +9,11 @@
 
 int main(int argc, char *argv[])
 {
-     int sockfd, newsockfd, portno, clilen,n;
+     int sockfd, newsockfd, portno, clilen,n,i;
      char buffer[256] ;
      char str[256];
      char str1[256];
+     i=1;
      struct sockaddr_in serv_addr, cli_addr;
      strcpy(str,"bye\n");
      sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
      while(1)
      {
      newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
-
+     printf("client %d connected\n",i);
         while(1)
         {
 
@@ -48,6 +49,8 @@ int main(int argc, char *argv[])
                 }
 
         }
+      i++;
+      close(newsockfd);
      }
      return 0;
 }
